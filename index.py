@@ -3,9 +3,16 @@ import matplotlib.pyplot as plt
 import sys
 
 general = pd.read_csv('https://raw.githubusercontent.com/jennah1016/name-tbd/refs/heads/main/all%20billing%20data.csv')
-electric = pd.read_csv('https://raw.githubusercontent.com/jennah1016/name-tbd/refs/heads/main/Electric%20billing%20data.csv')
-water = pd.read_csv('https://raw.githubusercontent.com/jennah1016/name-tbd/refs/heads/main/Water%20billing%20data.csv')
-natural_gas = pd.read_csv('https://raw.githubusercontent.com/jennah1016/name-tbd/refs/heads/main/Natural%20Gas%20billing%20data.csv')
+general['Cost'] = round(general['Cost'], 2)
+genpct = general.copy()
+
+totalspending = genpct['Cost'].sum()
+
+#data manipulation
+for i in genpct.index:
+    genpct.loc[i, 'Cost'] /= totalspending
+
+genpct['Cost'] = round(genpct['Cost'], 4)
 
 genheader = ('CTA Utility Spending Since 2024')
 pctheader = ('Utility Billing Percentages Since 2024')
@@ -16,19 +23,19 @@ def drawline(str):
         sys.stdout.write('-')
     print('\n')
 
+#general spending report
 print(genheader)
 drawline(genheader)
 print(general)
-
 drawline(genheader)
 
+#percent-based spending report
 print(pctheader)
 drawline(pctheader)
-print(general['Category'])
+print(genpct)
+drawline(pctheader)
 
-
-
-
+#pie chart creation
 labels = general['Category']
 numbers = general['Cost']
 colors = ['yellow', 'red', 'gray', 'mediumpurple', 'deepskyblue']
@@ -38,5 +45,3 @@ plt.title(genheader)
 plt.pie(numbers, labels=labels, colors=colors, explode=explode)
 plt.legend()
 plt.show()
-
-
