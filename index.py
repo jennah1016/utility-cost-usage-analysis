@@ -8,14 +8,15 @@ general['Cost'] = round(general['Cost'], 2)
 genpct = general.copy()
 
 #data manipulation
-totalspending = genpct['Cost'].sum()
+genpct.rename(columns={'Cost': 'Percentage'}, inplace=True)
+totalspending = genpct['Percentage'].sum()
 
 for i in genpct.index:
-    genpct.loc[i, 'Cost'] /= totalspending
+    genpct.loc[i, 'Percentage'] /= totalspending
 
-genpct['Cost'] = round(genpct['Cost'], 4)*100
+genpct['Percentage'] = round(genpct['Percentage'], 4)*100
 
-#report headers
+#report labels
 genheader = ('CTA Utility Spending Since 2024')
 pctheader = ('Utility Spending Percentages Since 2024')
 
@@ -42,9 +43,10 @@ drawline(pctheader)
 labels = general['Category']
 numbers = general['Cost']
 colors = ['yellow', 'red', 'gray', 'mediumpurple', 'deepskyblue']
-explode = (0.2, 0, 0, 0, 0)
+explode = (0.1, 0, 0, 0.1, 0.3)
 
 plt.title(genheader)
-plt.pie(numbers, labels=labels, colors=colors, explode=explode)
+plt.pie(numbers, labels=labels, colors=colors, explode=explode, startangle=45, radius=1.25)
+plt.tight_layout()
 plt.legend()
 plt.show()
