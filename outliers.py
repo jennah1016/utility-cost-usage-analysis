@@ -47,4 +47,10 @@ while True:
       
 #data manipulation (if necessary)
 #describe function to see what we have to work with
-#histogram
+print(report_header)
+drawline(report_header)
+print(chosen_data.describe())
+
+#box and whisker plot
+chosen_data.plot(kind='box')
+plt.xaxis('Year')
