@@ -3,9 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 #load actual data
-general = pd.read_csv('https://raw.githubusercontent.com/jennah1016/name-tbd/refs/heads/main/all%20billing%20data.csv')
 electric = pd.read_csv('https://raw.githubusercontent.com/jennah1016/name-tbd/refs/heads/main/Electric%20billing%20data.csv')
 water = pd.read_csv('https://raw.githubusercontent.com/jennah1016/name-tbd/refs/heads/main/Water%20billing%20data.csv')
+natural_gas = pd.read_csv('https://raw.githubusercontent.com/jennah1016/name-tbd/refs/heads/main/Natural%20Gas%20billing%20data.csv')
 
 #load fake data
 chosen_data = pd.read_csv('https://raw.githubusercontent.com/jennah1016/name-tbd/refs/heads/main/blank.csv')
@@ -44,13 +44,16 @@ while True:
     else:
         showoptions()
         user_option = input('Please choose a valid option:')
-      
-#data manipulation (if necessary)
+        
 #describe function to see what we have to work with
 print(report_header)
 drawline(report_header)
 print(chosen_data.describe())
 
 #box and whisker plot
-chosen_data.plot(kind='box')
-plt.xaxis('Year')
+#chosen_data.plot(kind='box', xlabel='Year', ylabel='Amount Spent (millions)')
+plt.title(report_header)
+plt.xlabel('Year')
+plt.ylabel('Amount Spent')
+chosen_data.boxplot()
+plt.show()

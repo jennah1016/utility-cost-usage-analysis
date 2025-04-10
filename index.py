@@ -42,7 +42,7 @@ drawline(pctheader)
 #pie chart creation
 labels = general['Category']
 numbers = general['Cost']
-colors = ['yellow', 'red', 'gray', 'mediumpurple', 'deepskyblue']
+colors = ['khaki', 'lightpink', 'darksalmon', 'mediumpurple', 'magenta']
 explode = (0.1, 0, 0, 0.1, 0.3)
 
 plt.title(genheader)

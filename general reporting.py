@@ -51,8 +51,6 @@ while True:
         showoptions()
         user_option = input('Please choose a valid option:')
 
-#data cleaning
-
 #monthly spending
 print(report_header)
 drawline(report_header)
@@ -60,5 +58,29 @@ print(chosen_data)
 drawline(report_header)
 
 #yearly avg
+print('Yearly Averages:')
+drawline(report_header)
+if user_option == '1' or user_option == '3':
+    print(f'2022 Average: ${chosen_data['2022'].mean()}')
+    print(f'2023 Average: ${chosen_data['2023'].mean()}')
+    print(f'2024 Average: ${chosen_data['2024'].mean()}')
+    print(f'2025 Average (YTD): ${chosen_data['2025 YTD'].mean()}')
+elif user_option == '2':
+    print(f'2023 Average: ${chosen_data['2023'].mean()}')
+    print(f'2024 Average: ${chosen_data['2024'].mean()}')
+    print(f'2025 Average (YTD): ${chosen_data['2025 YTD'].mean()}')
+else:
+    print(f'Average Spending on Electric: ${chosen_data['Electric'].mean()}')
+    print(f'Average Spending on Natural Gas: ${chosen_data['Natural Gas'].mean()}')
+    print(f'Average Spending on Water: ${chosen_data['Water'].mean()}')
+    print(f'Average Spending on Water and Sewer: ${chosen_data['Water and Sewer'].mean()}')
+    print(f'Amount Spent on Internet: ${chosen_data['Internet'].mean()}')
+
+drawline(report_header)
+
 #line chart
 plt.title(report_header)
+chosen_data.plot(title=report_header)
+plt.xlabel('Month')
+plt.ylabel('Amount Spent')
+plt.show()
